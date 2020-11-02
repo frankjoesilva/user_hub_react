@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import {
+    storeCurrentUser,
+    clearCurrentUser
+} from '../auth'
 
 import './Header.css';
 
@@ -20,17 +24,22 @@ const Header = ({
     }
 
     const handleSelectChange = (event) => {
+        event.preventDefault();
         const id = event.target.value;
         const user = userList.find(user => user.id == id);
         setSelectedUser(user);
     }
 
     const handleUserLogin = (event) => {
+        event.preventDefault();
+        storeCurrentUser(selectedUser);
         setCurrentUser(selectedUser);
     }
 
     const handleUserLogout = (event) => {
+        event.preventDefault()
         setSelectedUser(userList[0]);
+        clearCurrentUser();
         setCurrentUser(null);
     }
 

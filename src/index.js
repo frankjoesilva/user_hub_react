@@ -20,9 +20,13 @@ import {
     UserTodos
 } from './components';
 
+import {
+    getCurrentUser
+} from './auth';
+
 const App = () => {
     const [userList, setUserList] = useState([]);
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState(getCurrentUser());
     const [userPosts, setUserPosts] = useState([]);
     const [userTodos, setUserTodos] = useState([]);
 
@@ -88,14 +92,14 @@ const App = () => {
                                 <Redirect to="/" />
                             </Switch>
                         </>
-                        :
-                        <>
+                        : <>
                             <Switch>
                                 <Route exact path="/">
                                     <h2 style={{
                                         padding: ".5em"
-                                    }}>Please log in, above</h2>
+                                    }}>Log in, above</h2>
                                 </Route>
+                                <Redirect to="/" />
                             </Switch>
                         </>
                 }
